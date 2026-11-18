@@ -1,0 +1,540 @@
+{
+  "id": "promptli-comms",
+  "name": "Promptli Comms",
+  "description": "Email, SMS and phone calls for your OpenClaw agent over Promptli Agent Link: no webhooks or tunnels.",
+  "version": "0.1.0",
+  "categories": [
+    "channels"
+  ],
+  "channels": [
+    "promptli"
+  ],
+  "skills": [
+    "./skills"
+  ],
+  "cliCommands": [
+    {
+      "name": "promptli",
+      "description": "Promptli Comms: setup, status, doctor, logout",
+      "hasSubcommands": true
+    }
+  ],
+  "activation": {
+    "onCommands": [
+      "promptli"
+    ]
+  },
+  "contracts": {
+    "tools": [
+      "promptli_send_email",
+      "promptli_reply_email",
+      "promptli_read_email",
+      "promptli_search_email",
+      "promptli_send_text",
+      "promptli_list_conversations",
+      "promptli_get_conversation",
+      "promptli_lookup_contact",
+      "promptli_add_contact_memory",
+      "promptli_channel_status",
+      "promptli_place_call",
+      "promptli_schedule_call",
+      "promptli_list_calls",
+      "promptli_get_call_transcript",
+      "promptli_end_call",
+      "promptli_transfer_call",
+      "promptli_send_dtmf",
+      "promptli_call_add_fact",
+      "promptli_call_guidance"
+    ]
+  },
+  "toolMetadata": {
+    "promptli_send_email": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "sideEffecting": true
+    },
+    "promptli_reply_email": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "sideEffecting": true
+    },
+    "promptli_read_email": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "replaySafe": true
+    },
+    "promptli_search_email": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "replaySafe": true
+    },
+    "promptli_send_text": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "sideEffecting": true
+    },
+    "promptli_list_conversations": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "replaySafe": true
+    },
+    "promptli_get_conversation": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "replaySafe": true
+    },
+    "promptli_lookup_contact": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "replaySafe": true
+    },
+    "promptli_add_contact_memory": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "sideEffecting": true
+    },
+    "promptli_channel_status": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "replaySafe": true
+    },
+    "promptli_place_call": {
+      "sideEffecting": true,
+      "optional": true
+    },
+    "promptli_schedule_call": {
+      "sideEffecting": true,
+      "optional": true
+    },
+    "promptli_list_calls": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "replaySafe": true
+    },
+    "promptli_get_call_transcript": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "replaySafe": true
+    },
+    "promptli_end_call": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "sideEffecting": true
+    },
+    "promptli_transfer_call": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "sideEffecting": true
+    },
+    "promptli_send_dtmf": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "sideEffecting": true
+    },
+    "promptli_call_add_fact": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "sideEffecting": true
+    },
+    "promptli_call_guidance": {
+      "profiles": [
+        "messaging",
+        "full"
+      ],
+      "sideEffecting": true
+    }
+  },
+  "recommendedPrompts": [
+    "Email jane@example.com that the report is ready",
+    "Text +15551234567: running 10 minutes late",
+    "What did people ask my agent by email today?"
+  ],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  },
+  "channelConfigs": {
+    "promptli": {
+      "label": "Promptli Comms",
+      "description": "Email, SMS and phone calls for the agent over Promptli Agent Link.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "identity": {
+            "type": "string"
+          },
+          "baseUrl": {
+            "type": "string"
+          },
+          "apiKey": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "source": {
+                        "type": "string",
+                        "const": "env"
+                      },
+                      "provider": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+                      },
+                      "id": {
+                        "type": "string",
+                        "pattern": "^[A-Z][A-Z0-9_]{0,127}$"
+                      }
+                    },
+                    "required": [
+                      "source",
+                      "provider",
+                      "id"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "source": {
+                        "type": "string",
+                        "const": "store"
+                      },
+                      "provider": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+                      },
+                      "id": {
+                        "type": "string",
+                        "pattern": "^[A-Z][A-Z0-9_]{0,127}$"
+                      }
+                    },
+                    "required": [
+                      "source",
+                      "provider",
+                      "id"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "source": {
+                        "type": "string",
+                        "const": "file"
+                      },
+                      "provider": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "source",
+                      "provider",
+                      "id"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "source": {
+                        "type": "string",
+                        "const": "exec"
+                      },
+                      "provider": {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "source",
+                      "provider",
+                      "id"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            ]
+          },
+          "instanceId": {
+            "type": "string"
+          },
+          "dmPolicy": {
+            "default": "open",
+            "type": "string",
+            "enum": [
+              "pairing",
+              "allowlist",
+              "open",
+              "disabled"
+            ]
+          },
+          "allowFrom": {
+            "type": "array",
+            "items": {
+              "type": [
+                "string",
+                "number"
+              ]
+            }
+          },
+          "autoReply": {
+            "type": "boolean"
+          },
+          "batchWindowMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 30000
+          },
+          "voice": {
+            "type": "boolean"
+          },
+          "accounts": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "enabled": {
+                  "type": "boolean"
+                },
+                "identity": {
+                  "type": "string"
+                },
+                "baseUrl": {
+                  "type": "string"
+                },
+                "apiKey": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "source": {
+                              "type": "string",
+                              "const": "env"
+                            },
+                            "provider": {
+                              "type": "string",
+                              "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+                            },
+                            "id": {
+                              "type": "string",
+                              "pattern": "^[A-Z][A-Z0-9_]{0,127}$"
+                            }
+                          },
+                          "required": [
+                            "source",
+                            "provider",
+                            "id"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "source": {
+                              "type": "string",
+                              "const": "store"
+                            },
+                            "provider": {
+                              "type": "string",
+                              "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+                            },
+                            "id": {
+                              "type": "string",
+                              "pattern": "^[A-Z][A-Z0-9_]{0,127}$"
+                            }
+                          },
+                          "required": [
+                            "source",
+                            "provider",
+                            "id"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "source": {
+                              "type": "string",
+                              "const": "file"
+                            },
+                            "provider": {
+                              "type": "string",
+                              "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+                            },
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "source",
+                            "provider",
+                            "id"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "source": {
+                              "type": "string",
+                              "const": "exec"
+                            },
+                            "provider": {
+                              "type": "string",
+                              "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+                            },
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "source",
+                            "provider",
+                            "id"
+                          ],
+                          "additionalProperties": false
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "instanceId": {
+                  "type": "string"
+                },
+                "dmPolicy": {
+                  "default": "open",
+                  "type": "string",
+                  "enum": [
+                    "pairing",
+                    "allowlist",
+                    "open",
+                    "disabled"
+                  ]
+                },
+                "allowFrom": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "string",
+                      "number"
+                    ]
+                  }
+                },
+                "autoReply": {
+                  "type": "boolean"
+                },
+                "batchWindowMs": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 30000
+                },
+                "voice": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "dmPolicy"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "defaultAccount": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "dmPolicy"
+        ],
+        "additionalProperties": false
+      },
+      "uiHints": {
+        "": {
+          "label": "Promptli Comms",
+          "help": "Email, SMS and phone calls for this agent over Promptli Agent Link (no webhooks or tunnels)."
+        },
+        "identity": {
+          "label": "Agent handle",
+          "help": "Your Promptli agent identity. `openclaw promptli setup` fills it in."
+        },
+        "apiKey": {
+          "label": "API key",
+          "help": "Optional identity-scoped key (psk_…). Leave empty to use the browser login from `openclaw promptli setup`."
+        },
+        "dmPolicy": {
+          "label": "Who can reach the agent",
+          "help": "\"open\" (anyone with the address or number; needs allowFrom [\"*\"]), \"allowlist\", \"pairing\" or \"disabled\"."
+        },
+        "allowFrom": {
+          "label": "Allow from",
+          "help": "Email addresses or E.164 numbers allowed to reach the agent, or * when dmPolicy is open."
+        },
+        "voice": {
+          "label": "Answer calls",
+          "help": "Answer live phone calls with this agent (default on)."
+        }
+      }
+    }
+  }
+}
