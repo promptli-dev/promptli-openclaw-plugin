@@ -1,3 +1,5 @@
+<img src="assets/icon.png" alt="Promptli Comms" width="96" align="right">
+
 # Promptli Comms for OpenClaw
 
 Give your OpenClaw agent its own email address and phone number. People email, text or call your agent,
