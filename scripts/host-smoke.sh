@@ -12,6 +12,8 @@ mkdir -p "$HOME"
 (cd "$ROOT" && npm run build >/dev/null && npm pack --pack-destination "$TMP" >/dev/null)
 "$OC" plugins install "npm-pack:$(ls "$TMP"/*.tgz)" --force --accept-capabilities >"$TMP/install.log" 2>&1 || { cat "$TMP/install.log"; exit 1; }
 "$OC" plugins inspect promptli-comms --runtime --json >"$TMP/inspect.json"
+# The single quotes are intended: the backticks below are JavaScript template literals, not shell.
+# shellcheck disable=SC2016
 node -e '
 const r = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
 const man = JSON.parse(require("fs").readFileSync(process.argv[2], "utf8"));
