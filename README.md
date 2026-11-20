@@ -137,7 +137,7 @@ sh scripts/host-smoke.sh # installs the packed plugin into a throwaway OpenClaw 
 Install from a local checkout:
 
 ```bash
-npm run build && npm pack && openclaw plugins install npm-pack:./promptli-npm-openclaw-plugin-0.1.0.tgz
+npm run build && npm pack && openclaw plugins install npm-pack:./promptli-npm-openclaw-plugin-0.1.1.tgz
 ```
 
 Or run `PROMPTLI_OPENCLAW_SOURCE=$PWD sh install.sh`.

@@ -2,7 +2,7 @@
   "id": "promptli-comms",
   "name": "Promptli Comms",
   "description": "Email, SMS and phone calls for your OpenClaw agent over Promptli Agent Link: no webhooks or tunnels.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "categories": [
     "channels"
   ],

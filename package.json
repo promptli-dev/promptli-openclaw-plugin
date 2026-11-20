@@ -1,6 +1,6 @@
 {
   "name": "@promptli-npm/openclaw-plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Give your OpenClaw agent its own email address and phone number: email, SMS and phone calls as an OpenClaw channel over Promptli Comms Agent Link.",
   "license": "MIT",
   "type": "module",
@@ -16,6 +16,8 @@
   "files": [
     "dist",
     "skills",
+    "assets/icon.png",
+    "assets/icon.svg",
     "openclaw.plugin.json",
     "README.md",
     "LICENSE"
