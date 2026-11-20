@@ -11,6 +11,7 @@ if (man.version !== pkg.version) fail(`manifest version ${man.version} != packag
 if (!man.id || !man.configSchema) fail("manifest needs id and configSchema");
 if (!man.channels?.includes(pkg.openclaw.channel.id)) fail("manifest channels must include openclaw.channel.id");
 for (const f of [...pkg.openclaw.extensions, pkg.openclaw.setupEntry, "./dist/secret-contract-api.js"]) if (!existsSync(f)) fail(`missing built file ${f}`);
+for (const f of ["assets/icon.png", "assets/icon.svg"]) if (!existsSync(f) || !pkg.files.includes(f)) fail(`icon ${f} missing or not in package.json files`);
 for (const dir of man.skills ?? []) if (!existsSync(`${dir}/promptli-comms/SKILL.md`)) fail(`missing skill in ${dir}`);
 const mod = await import(new URL("../dist/index.js", import.meta.url));
 const names = mod.TOOL_NAMES;
